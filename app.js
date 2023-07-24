@@ -3,7 +3,7 @@ const playerLive = document.querySelector('.countNumber')
 let playerLiveCount = 6
 playerLive.textContent = playerLiveCount
 
-const listData  = [{
+const getData  = () => [{
     id: 1,
     src: './asset/img/Beard.png',
     name: 'beard'
@@ -72,17 +72,18 @@ const listData  = [{
 
 // random list data 
 const randomize = () => {
-    const getData = listData
-    getData.sort(() => Math.random() - 0.5)
-    return getData
+    const dataCart = getData()
+    dataCart.sort(() => Math.random() - 0.5)
+    return dataCart
 }
 
 //generate card from random list and add to html
 const generateCard = () =>  {
-    const getData = randomize()
+    const dataCart = randomize()
+    let listToggled = []
 
     //generate card
-    getData.forEach((item) => {
+    dataCart.forEach((item) => {
         const card = document.createElement('div')
         const face = document.createElement('img')
         const back = document.createElement('div')
@@ -104,11 +105,52 @@ const generateCard = () =>  {
         //add img to face
         face.src = item.src
 
-        //toggle card to visibility face
+        //toggle card 
         card.addEventListener('click', (e) => {
-            console.log(e, item)
+            const toggledCard = e.target
+
+            toggledCard.classList.add('toggled')
+            toggledCard.classList.add('flipped')
+
+            listToggled.push(toggledCard)
+
+            if(listToggled.length == 2) {
+                check(listToggled)
+                listToggled = []
+            }
         })
     })
+}
+
+const check  = (listToggled) => {
+    if(listToggled.length == 2) {
+        if(listToggled[0].getAttribute('name') == listToggled[1].getAttribute('name')) {
+            console.log('matching')
+        } else {
+            section.style.pointerEvents = 'none';
+            setTimeout(() => {
+
+                listToggled[0].classList.remove('toggled')
+                listToggled[1].classList.remove('toggled')
+                listToggled[0].classList.remove('flipped')
+                listToggled[1].classList.remove('flipped')
+
+                section.style.pointerEvents = '';
+            }, 1000)
+        }
+    }
+}
+
+const restart = () => {
+    const cards = document.querySelectorAll('.card')
+    const fades = document.querySelectorAll('.fade')
+    
+    cards.forEach((card) => {
+        card.classList.remove('toggled')
+        card.classList.remove('flipped')
+    })
+
+    generateCard()
 }
 
 generateCard()
