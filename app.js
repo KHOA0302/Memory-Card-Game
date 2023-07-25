@@ -165,13 +165,13 @@ const check = () => {
             "You are the dumbest person who spent a bunch of fucking time to play this shit and still lose🤨!!!🐧"
           );
           restart();
+        } else {
+          //reset pointer events and flip events
+          listToggled[listToggled.length - 2].classList.remove("toggled");
+          listToggled[listToggled.length - 1].classList.remove("toggled");
+          listToggled[listToggled.length - 2].classList.remove("flipped");
+          listToggled[listToggled.length - 1].classList.remove("flipped");
         }
-
-        //reset pointer events and flip events
-        listToggled[listToggled.length - 2].classList.remove("toggled");
-        listToggled[listToggled.length - 1].classList.remove("toggled");
-        listToggled[listToggled.length - 2].classList.remove("flipped");
-        listToggled[listToggled.length - 1].classList.remove("flipped");
 
         //if 2 card doesn't match, it will be popped off the list
         listToggled.pop();
@@ -191,8 +191,8 @@ const restart = () => {
   playerLiveCount = 10;
   playerLive.textContent = playerLiveCount;
 
-  listToggled = []
-  
+  listToggled = [];
+
   cards.forEach((card, index) => {
     card.classList.remove("toggled");
     card.classList.remove("flipped");
