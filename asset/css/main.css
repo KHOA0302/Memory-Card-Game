@@ -39,7 +39,7 @@ body {
   border-radius: 8px;
   /* just add */
   transform-style: preserve-3d;
-  transform: rotateY(0);
+  transform: rotateY(180deg);
 }
 
 .back,

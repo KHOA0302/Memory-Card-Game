@@ -191,6 +191,8 @@ const restart = () => {
   playerLiveCount = 10;
   playerLive.textContent = playerLiveCount;
 
+  listToggled = []
+  
   cards.forEach((card, index) => {
     card.classList.remove("toggled");
     card.classList.remove("flipped");
