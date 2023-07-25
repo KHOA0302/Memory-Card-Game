@@ -55,6 +55,6 @@ body {
     transform: rotateY(180deg);
 }
 
-.clicked {
+.flipped {
     pointer-events: none;
 }
